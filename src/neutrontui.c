@@ -4,6 +4,7 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "lector.h"
 
 #define MAX_CHARS 256
 #define MAX_ARCHIVOS 100
@@ -175,6 +176,13 @@ int main(void)
 
     int idx = eleccion - 1;
     snprintf(dispositivo, sizeof(dispositivo), "/dev/%s", archivos[idx]);
+    printf("\nAnalizando tabla de particiones de %s...\n", dispositivo);
+    if (leer_tabla(dispositivo) != 0)
+    {
+        printf("\n⚠️  No se pudo leer una tabla de particiones estándar.\n");
+        printf("Este dispositivo podría tener un formato propietario (como un MP3 chino).\n");
+        printf("Si continúas, se borrarán TODOS los datos de todas formas.\n");
+    }
 
     printf("\nRuta de la ISO: ");
     if (scanf("%255s", ruta_iso) != 1)
