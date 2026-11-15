@@ -1,1 +1,13 @@
+# Binarios
 bin/
+neutron
+neutrontui
+
+# Objetos
+*.o
+*.obj
+
+# Editor
+.vscode/
+*.swp
+*~
